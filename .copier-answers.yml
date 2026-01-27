@@ -1,0 +1,11 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v1.0.0
+_src_path: gh:martgra/typescript_template
+author_email: martin@gran.dev
+author_name: Martin Gran
+project_description: SPA for some alternatives
+project_name: alt-directory
+typescript_strict: true
+use_devcontainer: true
+use_github_actions: true
+use_vscode: true

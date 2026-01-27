@@ -1,0 +1,23 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /workspace
+
+    volumes:
+      - ..:/workspace
+      - alt_directory_extensions:/home/vscode/.vscode-server/extensions
+      - alt_directory_commandhistory:/home/vscode/commandhistory
+      - alt_directory_cache:/home/vscode/.cache
+      - alt_directory_bun:/home/vscode/.bun
+      - /workspace/node_modules
+
+    # Keep container running
+    command: sleep infinity
+
+volumes:
+  alt_directory_extensions:
+  alt_directory_commandhistory:
+  alt_directory_cache:
+  alt_directory_bun:
