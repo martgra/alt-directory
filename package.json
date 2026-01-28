@@ -6,10 +6,11 @@
   "private": true,
   "author": "Martin Gran <martin@gran.dev>",
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --target bun",
+    "dev": "vite --host",
+    "dev:api": "bun run dev-server.ts",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "dev": "bun run --watch src/index.ts",
-    "start": "bun run src/index.ts",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
@@ -17,7 +18,11 @@
     "secretlint": "secretlint",
     "knip": "knip",
     "knip:production": "knip --production",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "bun run migrate.ts",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
@@ -29,21 +34,46 @@
     ]
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.3.15",
     "@eslint/js": "^9.38.0",
+    "@secretlint/secretlint-rule-preset-recommend": "^11.2.5",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^24.9.1",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
+    "@vitejs/plugin-react": "^5.1.2",
+    "autoprefixer": "^10.4.23",
+    "drizzle-kit": "^0.31.8",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.6",
-    "@secretlint/secretlint-rule-preset-recommend": "^11.2.5",
-    "secretlint": "^11.2.5",
     "knip": "^5.33.3",
+    "lint-staged": "^16.2.6",
+    "postcss": "^8.5.6",
     "prettier": "^3.0.0",
+    "secretlint": "^11.2.5",
+    "tailwindcss": "^4.1.18",
     "typescript": "^5.2.2",
-    "typescript-eslint": "^8.46.2"
+    "typescript-eslint": "^8.46.2",
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "@netlify/functions": "^2.8.2",
+    "@supabase/supabase-js": "^2.47.10",
+    "canvas-confetti": "^1.9.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.45.1",
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.563.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwind-merge": "^3.4.0"
   }
 }

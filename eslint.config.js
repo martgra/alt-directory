@@ -4,6 +4,16 @@ import simpleImportSort from "eslint-plugin-simple-import-sort";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
+  {
+    ignores: [
+      "dist/**",
+      "build/**",
+      "node_modules/**",
+      "backend-examples/**",
+      "dev-server.ts",
+      "drizzle/**",
+    ],
+  },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   prettier,
