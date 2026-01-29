@@ -56,6 +56,20 @@ export const alternativeGroups: AlternativeGroup[] = [
         bgColor: "bg-slate-800",
       },
       {
+        name: "Glass",
+        url: "https://glass.photo",
+        tag: ALTERNATIVE_TAGS.CREATOR,
+        icon: "photo_camera_back",
+        bgColor: "bg-slate-700 text-white",
+      },
+      {
+        name: "Loops",
+        url: "https://joinloops.org",
+        tag: ALTERNATIVE_TAGS.FEDERATED,
+        icon: "motion_photos_on",
+        bgColor: "bg-purple-600 text-white",
+      },
+      {
         name: "BeReal",
         url: "https://bere.al",
         tag: ALTERNATIVE_TAGS.AUTHENTIC,
@@ -85,6 +99,13 @@ export const alternativeGroups: AlternativeGroup[] = [
         tag: ALTERNATIVE_TAGS.FEDERATED,
         icon: "group",
         bgColor: "bg-slate-100 text-slate-500 border border-slate-200",
+      },
+      {
+        name: "diaspora*",
+        url: "https://diasporafoundation.org",
+        tag: ALTERNATIVE_TAGS.DECENTRALIZED,
+        icon: "scatter_plot",
+        bgColor: "bg-slate-800 text-white",
       },
       {
         name: "Nextdoor",
@@ -135,6 +156,13 @@ export const alternativeGroups: AlternativeGroup[] = [
         bgColor: "bg-slate-900",
       },
       {
+        name: "Owncast",
+        url: "https://owncast.online",
+        tag: ALTERNATIVE_TAGS.STREAMING,
+        icon: "sensors",
+        bgColor: "bg-indigo-600 text-white",
+      },
+      {
         name: "Twitch",
         url: "https://www.twitch.tv",
         tag: ALTERNATIVE_TAGS.STREAMING,
@@ -159,18 +187,32 @@ export const alternativeGroups: AlternativeGroup[] = [
     },
     alternatives: [
       {
-        name: "Telegram",
-        url: "https://telegram.org",
-        tag: ALTERNATIVE_TAGS.PRIVACY,
-        icon: "send",
-        bgColor: "bg-[#229ED9] text-white",
-      },
-      {
         name: "Signal",
         url: "https://signal.org",
         tag: ALTERNATIVE_TAGS.PRIVACY,
         icon: "lock",
         bgColor: "bg-[#3A76F0] text-white",
+      },
+      {
+        name: "Session",
+        url: "https://getsession.org",
+        tag: ALTERNATIVE_TAGS.PRIVACY,
+        icon: "shield",
+        bgColor: "bg-green-600 text-white",
+      },
+      {
+        name: "Matrix / Element",
+        url: "https://matrix.org",
+        tag: ALTERNATIVE_TAGS.FEDERATED,
+        icon: "hub",
+        bgColor: "bg-slate-900 text-white",
+      },
+      {
+        name: "Telegram",
+        url: "https://telegram.org",
+        tag: ALTERNATIVE_TAGS.CENTRALIZED,
+        icon: "send",
+        bgColor: "bg-[#229ED9] text-white",
       },
     ],
   },
@@ -182,6 +224,20 @@ export const alternativeGroups: AlternativeGroup[] = [
       bgColor: "bg-black",
     },
     alternatives: [
+      {
+        name: "Loops",
+        url: "https://joinloops.org",
+        tag: ALTERNATIVE_TAGS.FEDERATED,
+        icon: "motion_photos_on",
+        bgColor: "bg-purple-600 text-white",
+      },
+      {
+        name: "UpScrolled",
+        url: "https://upscrolled.com",
+        tag: ALTERNATIVE_TAGS.ANTI_CENSORSHIP,
+        icon: "campaign",
+        bgColor: "bg-emerald-500 text-white",
+      },
       {
         name: "Kuaishou",
         url: "https://www.kuaishou.com",

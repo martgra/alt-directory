@@ -29,6 +29,7 @@ export interface Governance {
   userGovernance: boolean;
   transparentRules: boolean;
   appealProcess: boolean;
+  codeOfConductUrl?: string; // Link to community guidelines/code of conduct
 }
 
 export interface Maturity {

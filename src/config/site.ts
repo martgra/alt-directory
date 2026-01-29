@@ -12,16 +12,7 @@ export const siteConfig = {
     rss: "/rss",
   },
 
-  nav: [
-    {
-      title: copy.nav.browse,
-      href: "#",
-    },
-    {
-      title: copy.nav.submit,
-      href: "#",
-    },
-  ],
+  nav: [],
 
   social: {
     twitter: "#",

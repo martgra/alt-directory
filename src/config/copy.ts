@@ -14,16 +14,12 @@ export const copy = {
   },
 
   // Navigation
-  nav: {
-    browse: "Browse",
-    submit: "Submit",
-    signIn: "Sign In",
-  },
+  nav: {},
 
   // Main page
   pages: {
     home: {
-      title: "Social Media Alternatives",
+      title: "Switch to freedom",
       description:
         "Discover ethical, decentralized, and user-first platforms to reclaim your digital life.",
     },

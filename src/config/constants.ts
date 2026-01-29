@@ -11,6 +11,7 @@ export const ALTERNATIVE_TAGS = {
   DISCOVERY: "Discovery",
   LOCAL: "Local Community",
   COMMUNITY: "Community",
+  ANTI_CENSORSHIP: "Anti-Censorship",
 } as const;
 
 export type AlternativeTag = (typeof ALTERNATIVE_TAGS)[keyof typeof ALTERNATIVE_TAGS];
