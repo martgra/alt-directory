@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ALTERNATIVE_TAGS } from "@/config/constants";
+import { ALTERNATIVE_TAGS, copy, siteConfig } from "@/config";
 import { alternativeGroups } from "@/data/alternatives-grouped";
 
 interface SuggestionFormData {
@@ -54,21 +54,21 @@ export function SuggestAlternativeForm() {
     const newErrors: Partial<Record<keyof SuggestionFormData, string>> = {};
 
     if (!formData.establishedPlatform) {
-      newErrors.establishedPlatform = "Please select a platform";
+      newErrors.establishedPlatform = copy.suggestForm.validation.establishedPlatform;
     }
     if (!formData.alternativeName.trim()) {
-      newErrors.alternativeName = "Please enter an alternative name";
+      newErrors.alternativeName = copy.suggestForm.validation.alternativeName;
     }
     if (!formData.url.trim()) {
-      newErrors.url = "Please enter a URL";
+      newErrors.url = copy.suggestForm.validation.url.required;
     } else if (!isValidUrl(formData.url)) {
-      newErrors.url = "Please enter a valid URL";
+      newErrors.url = copy.suggestForm.validation.url.invalid;
     }
     if (!formData.description.trim()) {
-      newErrors.description = "Please describe why this is a good alternative";
+      newErrors.description = copy.suggestForm.validation.description;
     }
     if (!formData.tag) {
-      newErrors.tag = "Please select a category";
+      newErrors.tag = copy.suggestForm.validation.category;
     }
 
     setErrors(newErrors);
@@ -94,7 +94,7 @@ export function SuggestAlternativeForm() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/submit-suggestion", {
+      const response = await fetch(siteConfig.api.submitSuggestion, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -103,7 +103,7 @@ export function SuggestAlternativeForm() {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || "Submission failed");
+        throw new Error(result.message || copy.errors.submission);
       }
 
       setIsSuccess(true);
@@ -144,19 +144,21 @@ export function SuggestAlternativeForm() {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)} size="lg" className="gap-2">
+      <Button
+        onClick={() => setOpen(true)}
+        size="lg"
+        className="flex w-full items-center justify-center gap-2 shadow-lg shadow-slate-200 transition-all hover:-translate-y-0.5 md:w-auto"
+      >
         <Plus className="size-5" />
-        Suggest Alternative
+        {copy.suggestForm.buttonText}
       </Button>
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent>
           <DialogHeader onClose={() => handleOpenChange(false)}>
             <div>
-              <DialogTitle>Suggest an Alternative</DialogTitle>
-              <DialogDescription>
-                Help others discover better alternatives to mainstream platforms.
-              </DialogDescription>
+              <DialogTitle>{copy.suggestForm.title}</DialogTitle>
+              <DialogDescription>{copy.suggestForm.description}</DialogDescription>
             </div>
           </DialogHeader>
 
@@ -164,8 +166,8 @@ export function SuggestAlternativeForm() {
             {/* Established Platform */}
             <div className="space-y-2">
               <Label htmlFor="establishedPlatform">
-                Which platform are you suggesting an alternative for?
-                <span className="text-red-500">*</span>
+                {copy.suggestForm.fields.establishedPlatform.label}
+                <span className="text-red-500">{copy.suggestForm.validation.required}</span>
               </Label>
               <select
                 id="establishedPlatform"
@@ -174,7 +176,7 @@ export function SuggestAlternativeForm() {
                 onChange={handleChange}
                 className="flex h-10 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950"
               >
-                <option value="">Select a platform...</option>
+                <option value="">{copy.suggestForm.fields.establishedPlatform.placeholder}</option>
                 {alternativeGroups.map((group) => (
                   <option key={group.id} value={group.id}>
                     {group.original.name}
@@ -189,13 +191,13 @@ export function SuggestAlternativeForm() {
             {/* Alternative Name */}
             <div className="space-y-2">
               <Label htmlFor="alternativeName">
-                Alternative Platform Name
-                <span className="text-red-500">*</span>
+                {copy.suggestForm.fields.alternativeName.label}
+                <span className="text-red-500">{copy.suggestForm.validation.required}</span>
               </Label>
               <Input
                 id="alternativeName"
                 name="alternativeName"
-                placeholder="e.g., Mastodon"
+                placeholder={copy.suggestForm.fields.alternativeName.placeholder}
                 value={formData.alternativeName}
                 onChange={handleChange}
               />
@@ -207,14 +209,14 @@ export function SuggestAlternativeForm() {
             {/* URL */}
             <div className="space-y-2">
               <Label htmlFor="url">
-                Website URL
-                <span className="text-red-500">*</span>
+                {copy.suggestForm.fields.url.label}
+                <span className="text-red-500">{copy.suggestForm.validation.required}</span>
               </Label>
               <Input
                 id="url"
                 name="url"
                 type="url"
-                placeholder="https://example.com"
+                placeholder={copy.suggestForm.fields.url.placeholder}
                 value={formData.url}
                 onChange={handleChange}
               />
@@ -224,8 +226,8 @@ export function SuggestAlternativeForm() {
             {/* Category */}
             <div className="space-y-2">
               <Label htmlFor="tag">
-                Category
-                <span className="text-red-500">*</span>
+                {copy.suggestForm.fields.category.label}
+                <span className="text-red-500">{copy.suggestForm.validation.required}</span>
               </Label>
               <select
                 id="tag"
@@ -234,7 +236,7 @@ export function SuggestAlternativeForm() {
                 onChange={handleChange}
                 className="flex h-10 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950"
               >
-                <option value="">Select a category...</option>
+                <option value="">{copy.suggestForm.fields.category.placeholder}</option>
                 {Object.entries(ALTERNATIVE_TAGS).map(([key, value]) => (
                   <option key={key} value={value}>
                     {value}
@@ -247,13 +249,13 @@ export function SuggestAlternativeForm() {
             {/* Description */}
             <div className="space-y-2">
               <Label htmlFor="description">
-                Why is this a good alternative?
-                <span className="text-red-500">*</span>
+                {copy.suggestForm.fields.description.label}
+                <span className="text-red-500">{copy.suggestForm.validation.required}</span>
               </Label>
               <Textarea
                 id="description"
                 name="description"
-                placeholder="Describe what makes this platform a great alternative. Include key features, privacy benefits, or unique selling points..."
+                placeholder={copy.suggestForm.fields.description.placeholder}
                 value={formData.description}
                 onChange={handleChange}
                 className="min-h-[120px]"
@@ -263,18 +265,16 @@ export function SuggestAlternativeForm() {
 
             {/* Optional Email */}
             <div className="space-y-2">
-              <Label htmlFor="submitterEmail">Your Email (optional)</Label>
+              <Label htmlFor="submitterEmail">{copy.suggestForm.fields.email.label}</Label>
               <Input
                 id="submitterEmail"
                 name="submitterEmail"
                 type="email"
-                placeholder="email@example.com"
+                placeholder={copy.suggestForm.fields.email.placeholder}
                 value={formData.submitterEmail}
                 onChange={handleChange}
               />
-              <p className="text-xs text-slate-500">
-                We'll only use this to follow up if we have questions about your suggestion.
-              </p>
+              <p className="text-xs text-slate-500">{copy.suggestForm.fields.email.helpText}</p>
             </div>
 
             {/* Submit Button */}
@@ -285,7 +285,7 @@ export function SuggestAlternativeForm() {
                 onClick={() => handleOpenChange(false)}
                 disabled={isSubmitting}
               >
-                Cancel
+                {copy.suggestForm.buttons.cancel}
               </Button>
               <Button type="submit" disabled={isSubmitting || isSuccess} className="min-w-[140px]">
                 {isSubmitting && <Loader2 className="size-4 animate-spin" />}
@@ -298,9 +298,9 @@ export function SuggestAlternativeForm() {
                     <Check className="size-5" />
                   </motion.div>
                 )}
-                {!isSubmitting && !isSuccess && "Submit Suggestion"}
-                {isSubmitting && "Submitting..."}
-                {isSuccess && "Submitted!"}
+                {!isSubmitting && !isSuccess && copy.suggestForm.buttons.submit}
+                {isSubmitting && copy.suggestForm.buttons.submitting}
+                {isSuccess && copy.suggestForm.buttons.submitted}
               </Button>
             </div>
           </form>

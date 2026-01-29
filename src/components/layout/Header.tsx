@@ -1,25 +1,31 @@
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
+import { copy, siteConfig, theme } from "@/config";
 
 import { SiteLogo } from "./site-logo";
 
 export function Header() {
   return (
-    <header className="mb-16 flex h-12 items-center justify-between">
+    <header className="flex items-center justify-between border-b border-slate-200/50 px-4 py-4 md:border-0 md:px-6 md:py-6">
       <SiteLogo />
 
-      <nav className="flex items-center gap-8">
+      <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
         {siteConfig.nav.map((item) => (
           <a
             key={item.title}
             href={item.href}
-            className="text-sm font-medium text-slate-500 transition-colors hover:text-[#2563eb]"
+            className={`${theme.transitions.default} hover:text-[${theme.colors.primary}]`}
           >
             {item.title}
           </a>
         ))}
-        <Button>Sign In</Button>
+        <Button>{copy.nav.signIn}</Button>
       </nav>
+
+      <div className="flex items-center gap-2 md:hidden">
+        <button className="rounded-lg p-2 hover:bg-slate-100">
+          <span className="material-symbols-outlined text-2xl">menu</span>
+        </button>
+      </div>
     </header>
   );
 }

@@ -9,17 +9,23 @@ interface PlatformIconProps {
   isAlternative?: boolean;
 }
 
-export function PlatformIcon({ icon, bgColor, isTextIcon = false }: PlatformIconProps) {
+export function PlatformIcon({
+  icon,
+  bgColor,
+  isTextIcon = false,
+  isAlternative = false,
+}: PlatformIconProps) {
   return (
     <div
       className={cn(
-        "flex size-10 items-center justify-center rounded-xl text-white shadow-sm",
+        "flex shrink-0 items-center justify-center rounded-xl text-white",
+        isAlternative ? "size-10" : "size-12",
         bgColor,
-        isTextIcon && "text-xl font-bold"
+        isTextIcon && "text-2xl font-bold"
       )}
     >
       {typeof icon === "string" && !isTextIcon ? (
-        <span className="material-symbols-outlined text-xl">{icon}</span>
+        <span className="material-symbols-outlined">{icon}</span>
       ) : (
         icon
       )}

@@ -32,13 +32,6 @@ export const alternativeGroups: AlternativeGroup[] = [
         bgColor: "bg-[#563ACC] text-white",
       },
       {
-        name: "Threads",
-        url: "https://www.threads.net",
-        tag: ALTERNATIVE_TAGS.CENTRALIZED,
-        icon: "chat",
-        bgColor: "bg-black text-white",
-      },
-      {
         name: "Substack Notes",
         url: "https://substack.com",
         tag: ALTERNATIVE_TAGS.CREATOR,
