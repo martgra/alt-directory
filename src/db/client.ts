@@ -55,9 +55,3 @@ export async function createDbClient(databaseUrl?: string) {
   const sql = neon(databaseUrl);
   return drizzleNeon(sql, { schema });
 }
-
-// Synchronous version for serverless functions (Neon only)
-export function createDbClientSync(databaseUrl: string) {
-  const sql = neon(databaseUrl);
-  return drizzleNeon(sql, { schema });
-}
