@@ -76,13 +76,6 @@ export const alternativeGroups: AlternativeGroup[] = [
         icon: "camera_front",
         bgColor: "bg-slate-900 text-white",
       },
-      {
-        name: "Lemon8",
-        url: "https://www.lemon8-app.com",
-        tag: ALTERNATIVE_TAGS.DISCOVERY,
-        icon: "auto_awesome",
-        bgColor: "bg-yellow-200 text-slate-900",
-      },
     ],
   },
   {
